@@ -1,0 +1,5 @@
+rootProject.name = 'boot-auth-parent'
+
+include 'boot-auth-server'
+include 'boot-microservice'
+include 'boot-web-app'

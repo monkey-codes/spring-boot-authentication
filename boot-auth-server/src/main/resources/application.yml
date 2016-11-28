@@ -1,0 +1,14 @@
+debug: true
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+server:
+  port: 9991
+  contextPath: /auth
+
+security:
+  user:
+    password: password
+  sessions: if-required
