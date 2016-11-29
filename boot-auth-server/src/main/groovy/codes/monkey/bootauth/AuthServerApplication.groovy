@@ -25,7 +25,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @SpringBootApplication
-@EnableResourceServer
+//@EnableResourceServer
 class AuthServerApplication extends WebMvcConfigurerAdapter{
 
     @Override
@@ -51,10 +51,14 @@ class AuthServerApplication extends WebMvcConfigurerAdapter{
             http
                     .formLogin().loginPage('/login').permitAll()
                     .and().httpBasic().and()
-                    .requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
+                    .requestMatchers()
+                    //specify urls handled
+                    .antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
+                    .antMatchers("/fonts/**", "/js/**", "/css/**")
                     .and()
                     .authorizeRequests()
-                    .antMatchers('/**').authenticated()
+                    .antMatchers("/fonts/**", "/js/**", "/css/**").permitAll()
+                    .anyRequest().authenticated()
 
 
         }

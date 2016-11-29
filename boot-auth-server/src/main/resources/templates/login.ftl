@@ -61,7 +61,7 @@
             margin: 16px 0;
         }
         form[role=login] > div {
-            text-align: center;
+            text-align: left;
         }
 
         .form-links {
@@ -98,7 +98,23 @@
 
                     <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>
                     <div>
-                        <a href="#">Create account</a> or <a href="#">reset password</a>
+                        <h3>Valid accounts</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <strong>reader : reader</strong>
+                                <div class="pull-right">
+                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Permissoins.
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <strong>guest : guest</strong>
+                                <div class="pull-right">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Permissoins.
+                                </div>
+                            </li>
+                        </ul>
                     </div>
 
                 </form>
