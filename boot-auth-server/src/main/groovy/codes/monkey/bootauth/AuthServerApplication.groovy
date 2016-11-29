@@ -49,7 +49,7 @@ class AuthServerApplication extends WebMvcConfigurerAdapter{
         protected void configure(HttpSecurity http) throws Exception {
 
             http
-                    .csrf().disable().formLogin().loginPage('/login').permitAll()
+                    .formLogin().loginPage('/login').permitAll()
                     .and().httpBasic().and()
                     .requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
                     .and()
@@ -69,6 +69,13 @@ class AuthServerApplication extends WebMvcConfigurerAdapter{
                     .withUser('writer')
                     .password('writer')
                     .authorities('ROLE_READER', 'ROLE_WRITER')
+                    .and()
+                    .withUser('guest')
+                    .password('guest')
+                    .authorities('ROLE_GUEST')
+
+
+
         }
     }
 
@@ -84,13 +91,13 @@ class AuthServerApplication extends WebMvcConfigurerAdapter{
         void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             clients.inMemory()
                     .withClient('web-app')
-                    .scopes('oa')
+                    .scopes('read')
 //                    .redirectUris('/client-app/index.html')
 //                    .redirectUris('http://localhost:9999/client-app/index.html')
                     .autoApprove(true)
                     .accessTokenValiditySeconds(600)
                     .refreshTokenValiditySeconds(600)
-                    .authorities('ROLE_READER', 'ROLE_WRITER')
+//                    .authorities('ROLE_READER', 'ROLE_WRITER')
                     .authorizedGrantTypes('implicit', 'refresh_token', 'password', 'authorization_code')
         }
 

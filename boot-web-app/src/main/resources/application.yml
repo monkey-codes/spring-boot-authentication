@@ -16,7 +16,7 @@ zuul:
       url: http://localhost:9991/auth/
       sensitive-headers:
     resource:
-      path: /api/property/**
+      path: /api/**
       url: http://localhost:9992/
       sensitive-headers:
 

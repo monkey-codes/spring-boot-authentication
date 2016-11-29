@@ -30,7 +30,9 @@ class MicroserviceApplication {
     public Map readFoo(@PathVariable Integer id, Principal principal) {
         [
                 id: id,
-                name: "${UUID.randomUUID()}" as String
+                resource: "${UUID.randomUUID()}" as String,
+                user: principal.getName()
+
         ]
     }
 
@@ -43,8 +45,7 @@ class MicroserviceApplication {
         void configure(HttpSecurity http) throws Exception {
             http.csrf().disable()
                     .authorizeRequests()
-                    .antMatchers("/**").authenticated()
-                    .antMatchers(HttpMethod.GET, "/*").hasAuthority("ROLE_READER")
+                    .antMatchers("/**").hasAuthority('ROLE_READER')
         }
 
     }

@@ -92,6 +92,10 @@
                     <input type="password" placeholder="Password" class="form-control input-lg" id="password" name="password"  required="" />
 
 
+                    <input type="hidden"
+                           name="${_csrf.parameterName}"
+                           value="${_csrf.token}" />
+
                     <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>
                     <div>
                         <a href="#">Create account</a> or <a href="#">reset password</a>

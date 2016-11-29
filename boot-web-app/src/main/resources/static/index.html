@@ -51,17 +51,14 @@
         <div class="col-md-4">
           <h2>Heading</h2>
           <p id="p1">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
           <h2>Heading</h2>
           <p id="p2">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
        </div>
         <div class="col-md-4">
           <h2>Heading</h2>
           <p id="p3">Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
       </div>
 
@@ -81,15 +78,15 @@
         $(function () {
             function loadProperty(id) {
                 return function () {
-                    return $.getJSON('api/property/' + id);
+                    return $.getJSON('api/' + id);
                 }
             }
 
-            function sleep(seconds) {
+            function sleep(seconds, promiseResult) {
                 return function () {
                     var def = jQuery.Deferred();
                     setTimeout(function () {
-                        def.resolve({})
+                        def[promiseResult]({})
                     }, seconds * 1000);
                     return def.promise();
                 }
@@ -97,10 +94,15 @@
 
             [1, 2, 3].reduce(function (pp, id) {
                 return pp.then(loadProperty(id))
-                        .then(function (data) {
-                            $('#p' + id).html("Loaded protected resource from microservice: <strong>" + data.name+"</strong>");
+                        .then(function success(data) {
+                            $('#p' + id).html('<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <strong>'+data.user+'</strong>: Loaded protected resource from microservice: <strong>' + data.resource+'</strong> </div>');
                             return data;
-                        }).then(sleep(1));
+                        },
+                        function fail(data){
+                            $('#p' + id).html('<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 403 Forbidden, user has insufficient privileges</div>');
+                            return data;
+                        })
+                        .then(sleep(1,'resolve'),sleep(1,'reject'));
             }, $.when());
 
         });
