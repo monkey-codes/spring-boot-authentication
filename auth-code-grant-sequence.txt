@@ -1,0 +1,24 @@
+#can be used with https://bramp.github.io/js-sequence-diagrams/
+
+Browser->Web App: "/secret-page"
+Web App->Browser: 302 "http://authserver/login"
+Browser->Auth Server: GET "/login"
+Browser->Auth Server: POST "/login"\nwith username & password
+Auth Server->Auth Server: authenticate
+Auth Server->Browser: 302\n"/oauth/authorize?client_id=web-app"
+Browser->Auth Server: GET\n""/oauth/authorize?client_id=web-app""
+Note right of Browser: Optional Step:\nPage to authorize
+"web-app"\naccess to user info.
+Auth Server->Browser: 302\n"http://web-app/login?code=secret_code"
+Browser->Web App: GET "/login?code=secret_code"
+Web App->Auth Server: POST\n"/oauth/token?code=secret_code"
+Auth Server->Web App: Signed JWT Token
+Note right of Web App: Store token in session
+Web App->Browser: 302 "/secret-page"
+Browser->Web App: GET "/secret-page"
+Browser->Web App: GET "ajax://secret-resource"
+Web App->Microservice: Proxy GET "/secret-resource"+JWT
+Microservice->Microservice: Verify JWT signature\nusing the Public Key
+Microservice->Microservice: User Authorized?
+Microservice->Web App: Secret Resource (JSON)
+Web App->Browser: Secret Resource (JSON)
