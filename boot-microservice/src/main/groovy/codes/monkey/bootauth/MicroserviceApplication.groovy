@@ -22,7 +22,6 @@ import java.security.Principal
  * http://localhost:9999/auth/oauth/authorize?response_type=code&client_id=web-app
  */
 @SpringBootApplication
-@EnableResourceServer
 @RestController
 class MicroserviceApplication {
 

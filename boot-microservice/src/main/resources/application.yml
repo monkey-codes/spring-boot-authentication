@@ -1,13 +1,6 @@
 server:
   port: 9992
 
-debug: true
-
-logging:
-  level:
-    org.springframework.security: DEBUG
-
-
 security:
   sessions: stateless
   user:

@@ -77,9 +77,6 @@ class AuthServerApplication extends WebMvcConfigurerAdapter{
                     .withUser('guest')
                     .password('guest')
                     .authorities('ROLE_GUEST')
-
-
-
         }
     }
 
@@ -91,17 +88,15 @@ class AuthServerApplication extends WebMvcConfigurerAdapter{
         @Qualifier('authenticationManagerBean')
         AuthenticationManager authenticationManager
 
+
         @Override
         void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             clients.inMemory()
                     .withClient('web-app')
                     .scopes('read')
-//                    .redirectUris('/client-app/index.html')
-//                    .redirectUris('http://localhost:9999/client-app/index.html')
                     .autoApprove(true)
                     .accessTokenValiditySeconds(600)
                     .refreshTokenValiditySeconds(600)
-//                    .authorities('ROLE_READER', 'ROLE_WRITER')
                     .authorizedGrantTypes('implicit', 'refresh_token', 'password', 'authorization_code')
         }
 
