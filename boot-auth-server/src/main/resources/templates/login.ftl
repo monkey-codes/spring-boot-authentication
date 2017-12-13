@@ -116,6 +116,9 @@
                             </li>
                         </ul>
                     </div>
+                    <div>
+                        With Facebook: <a href="login/facebook">click here</a>
+                    </div>
 
                 </form>
 
