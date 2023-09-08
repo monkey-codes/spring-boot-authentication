@@ -1,5 +1,5 @@
 # spring-boot-authentication
-A sample project to show [how to use JWT and OAuth with Spring Boot](http://blog.monkey.codes/how-to-use-jwt-and-oauth-with-spring-boot/).
+A sample project to show [how to use JWT and OAuth with Spring Boot](https://johanzietsman.com/how-to-use-jwt-and-oauth-with-spring-boot/).
 
 The sample consists of three distinct applications:
 
